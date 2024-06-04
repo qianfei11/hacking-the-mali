@@ -425,8 +425,10 @@ Mali_base_mmu.h // well written
 GPU MMU is programmed by CPU. 
 
 Looks like a 4 level pgtable?? (this is for Bifrost.. They didn’t change the macro names)
+```cpp
 	#define MIDGARD_MMU_TOPLEVEL    MIDGARD_MMU_LEVEL(0)
 	#define MIDGARD_MMU_BOTTOMLEVEL MIDGARD_MMU_LEVEL(3)
+```
 See kbase_mmu_teardown_pages()
 
 For Midgard, 2 levels. 
@@ -441,11 +443,9 @@ see `mali_kbase_gpu_regmap.h`Max 16 addr spaces
 
 #### d/s
 
-struct kbase_mmu_table  - object representing a set of GPU page tables. @pgd -- pgtable root (hw address)
-
-struct kbase_mmu_mode - object containing pointer to methods invoked for programming the MMU, as per the MMU mode supported by Hw.
-
-struct kbase_as - object representing an address space of GPU.
+- struct kbase_mmu_table  - object representing a set of GPU page tables. @pgd -- pgtable root (hw address)
+- struct kbase_mmu_mode - object containing pointer to methods invoked for programming the MMU, as per the MMU mode supported by Hw.
+- struct kbase_as - object representing an address space of GPU.
 
 One kbase_device has many (up to 16) kbase_as `struct kbase_as as[BASE_MAX_NR_AS]`;
 	
@@ -454,16 +454,17 @@ Each @kbase_context has a @as_nr, which seems to point to the as.
 #### Code
 drivers\gpu\arm\midgard\mmu
 
-High level MMU function
-kbase_mmu_flush_invalidate_noretain()
+High level MMU function: `kbase_mmu_flush_invalidate_noretain()`
 
 (..goes into…)
 The actual hw function operating MMU:
+
+```
 Mali_kbase_mmu_hw_direct.c  --> kbase_mmu_hw_do_operation(), etc.
+```
 
 #### Pgtable 
-Allocate page table for GPU
-kbase_mmu_alloc_pgd()
+Allocate page table for GPU: `kbase_mmu_alloc_pgd()`
 
 #### Kernel threads
 - Workqueue mali_mmu
@@ -481,8 +482,7 @@ The  actual count of addr spaces…. Supported by MMU hardware
 ```
 // 8 for G71
 
-See
-kbase_device_as_init()
+See `kbase_device_as_init()`
 
 ```
 // desc for one addr space… 
@@ -493,8 +493,7 @@ struct kbase_mmu_setup {
 };
 ```
 
-Configuration 
-kbase_mmu_get_as_setup()
+Configuration: `kbase_mmu_get_as_setup()`
 
 #### Mmap path 
 Right, at that time that only allocate page for GPU pgtable only. 
@@ -504,11 +503,3 @@ There is a structure called "kbase_va_region" which contains some mapping relate
 
 Basically, pages are allocated in GPU side and then CPU calls kbase_mmap to get the allocated pages from GPU side.
 Look at kbase_reg_mmap() and kbase_gpu_mmap(). It tries to let GPU use same VA of CPU and maps the VA to PA updating MMU.
-
-
-
-
-
-
-
-
