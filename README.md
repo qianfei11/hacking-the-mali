@@ -197,17 +197,17 @@ https://jizhuoran.gitbook.io/mali-gpu/mali-gpu-driver/she-bei-zhu-ce-gpu-registe
 
 ## Acronyms 
 
-Kbdev -- kbase device. This corresponds to a GPU
-Kctx -- a GPU context (?)
-GP -- geometry processor
-PP -- pixel processor
-group -- A render group, i.e. all core sharing the same Mali MMU. see `struct mali_group`
-kbase -- the kernel driver instance for midgard 
-TLstream -- timeline stream (for trace record)
-js - job slot. As exposed by GPUs
-jc - job chain. 
-Jd - job dispatcher (in the driver)
-AS - address space (for GPU)
+Kbdev -- kbase device. This corresponds to a GPU<br>
+Kctx -- a GPU context (?)<br>
+GP -- geometry processor<br>
+PP -- pixel processor<br>
+group -- A render group, i.e. all core sharing the same Mali MMU. see `struct mali_group`<br>
+kbase -- the kernel driver instance for midgard <br>
+TLstream -- timeline stream (for trace record)<br>
+js - job slot. As exposed by GPUs<br>
+jc - job chain. <br>
+Jd - job dispatcher (in the driver)<br>
+AS - address space (for GPU)<br>
 LPU -- Logical Processing Unit. For timeline display only (?)
 
 ## Overview
