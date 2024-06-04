@@ -197,18 +197,18 @@ https://jizhuoran.gitbook.io/mali-gpu/mali-gpu-driver/she-bei-zhu-ce-gpu-registe
 
 ## Acronyms 
 
-Kbdev -- kbase device. This corresponds to a GPU<br>
-Kctx -- a GPU context (?)<br>
-GP -- geometry processor<br>
-PP -- pixel processor<br>
-group -- A render group, i.e. all core sharing the same Mali MMU. see `struct mali_group`<br>
-kbase -- the kernel driver instance for midgard <br>
-TLstream -- timeline stream (for trace record)<br>
-js - job slot. As exposed by GPUs<br>
-jc - job chain. <br>
-Jd - job dispatcher (in the driver)<br>
-AS - address space (for GPU)<br>
-LPU -- Logical Processing Unit. For timeline display only (?)
+- Kbdev -- kbase device. This corresponds to a GPU
+- Kctx -- a GPU context (?)
+- GP -- geometry processor
+- PP -- pixel processor
+- group -- A render group, i.e. all core sharing the same Mali MMU. see `struct mali_group`
+- kbase -- the kernel driver instance for midgard
+- TLstream -- timeline stream (for trace record)
+- js - job slot. As exposed by GPUs
+- jc - job chain.
+- Jd - job dispatcher (in the driver)
+- AS - address space (for GPU)
+- LPU -- Logical Processing Unit. For timeline display only (?)
 
 ## Overview
 
@@ -234,16 +234,16 @@ As both structure jc, the gpu instructions might be not different from each othe
 ### Overview
 
 Primarily, there are 3 types of registers (CPU Control, Job Control, MMU Management).
-GPU_CTRL: GPU Control
-JOB_CTRL: JOB Control
-MMU_MGMT: MMU Control
+- GPU_CTRL: GPU Control
+- JOB_CTRL: JOB Control
+- MMU_MGMT: MMU Control
 
 **Note** each type may have multiple instances. e.g. we may have a one GPU command register, 3 JS command registers, 8 AS command registers. 3 JS means you have three types of jobs e.g. shader, tiler, ... 8 AS are for multiple address spaces used by GPU, basically # of page tables the GPU can hold. Normally we only use a single page table since we do not generate multiple contexts.
 
 Three types of commands can be written to their corresponding reg types: 
-GPU_COMAMND: GPU-related (e.g. soft reset, performance counter sample, etc.)
-JS_COMMAND: Job-related (e.g. start or stop processing a job chain, etc.)
-AS_COMMAND: MMU-related (e.g. MMU lock, broadcast, etc.)
+- GPU_COMAMND: GPU-related (e.g. soft reset, performance counter sample, etc.)
+- JS_COMMAND: Job-related (e.g. start or stop processing a job chain, etc.)
+- AS_COMMAND: MMU-related (e.g. MMU lock, broadcast, etc.)
 
 ![jsandtrace](figs/jsandtrace.png)
 
@@ -324,16 +324,16 @@ On hikey960, this is in mali_kbase_native_mgm.[c|h]
  * memory allocation and freeing functions.
 ```
 
-Note this code is generic (drivers/base), not quite Mali specific. 
-In odroid-xu4 v4.15, there's not such a component (??)
-Absent in Hikey960 android kernel (4.19)
+- Note this code is generic (drivers/base), not quite Mali specific. 
+- In odroid-xu4 v4.15, there's not such a component (??)
+- Absent in Hikey960 android kernel (4.19)
 
 Seems the "root" of mm allocation. 
 
 `memory_group_manager.h`
-struct memory_group_manager_device - Device structure for a memory group
-Since it is a "device structure"? Caan there be such hardware?
-It defines a bunch of memory_group_manager_ops to be implemented… plat specific?
+- struct memory_group_manager_device - Device structure for a memory group
+- Since it is a "device structure"? Caan there be such hardware?
+- It defines a bunch of memory_group_manager_ops to be implemented… plat specific?
 	
 Kbdev->mgm_dev
 
@@ -466,12 +466,13 @@ Allocate page table for GPU
 kbase_mmu_alloc_pgd()
 
 #### Kernel threads
-Workqueue mali_mmu
-page_fault_worker
-bus_fault_worker
+- Workqueue mali_mmu
+- page_fault_worker
+- bus_fault_worker
 
 #### Address space
 This is like "segment". One addr space seems a tree of pgtables. 
+
 The  actual count of addr spaces…. Supported by MMU hardware
 ```
  * @nr_hw_address_spaces:  Number of address spaces actually available in the
