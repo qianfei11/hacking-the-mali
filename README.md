@@ -233,7 +233,7 @@ As both structure jc, the gpu instructions might be not different from each othe
 
 ### Overview
 
-Primarily, there are 3 types of registers (CPU Control, Job Control, MMU Management).
+Primarily, there are 3 types of registers (GPU Control, Job Control, MMU Management).
 - GPU_CTRL: GPU Control
 - JOB_CTRL: JOB Control
 - MMU_MGMT: MMU Control
